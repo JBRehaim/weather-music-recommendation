@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 import org.jboss.resteasy.annotations.ClientURI;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -16,8 +20,13 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "TEMPERATURE")
+@Entity
+@Table(name = "TEMPERATURE", schema = "dbo")
 public class Temperature implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "CURRENT_TEMPERATURE")
     private Double temp;

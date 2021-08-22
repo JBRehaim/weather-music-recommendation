@@ -26,7 +26,7 @@ public class ClimateRequestDTO implements Serializable{
 
     @JsonProperty("weather")
     @Column(name = "weather")
-    private List weather;
+    private List<ObjectNode> weather;
 
     @JsonProperty("base")
     private String base;

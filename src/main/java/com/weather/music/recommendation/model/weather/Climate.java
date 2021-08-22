@@ -7,8 +7,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -21,47 +24,49 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Entity
 @Table(name = "WEATHER_QUERIES")
 public class Climate implements Serializable{
 
+    @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "USER")
-    @OneToMany
+    @JoinColumn(name = "USER")
+    @ManyToOne
     private User user;
 
-    @Column(name = "LOCALIZATION")
+    @JoinColumn(name = "LOCALIZATION")
     @OneToOne
     private Coordinates localization;
 
-    @Column(name = "WEATHER")
-    @ManyToOne
+    @JoinColumn(name = "WEATHER")
+    @OneToMany
     private List<Weather> weather;
 
     @Column(name = "BASE")
     private String base;
 
-    @Column(name = "TEMPERATURE")
+    @JoinColumn(name = "TEMPERATURE")
     @OneToOne
     private Temperature temperature;
 
     @Column(name = "VISIBILITY")
     private Double visibility;
 
-    @Column(name = "WIND")
+    @JoinColumn(name = "WIND")
     @OneToOne
     private Wind wind;
 
-    @Column(name = "CLOUDS")
+    @JoinColumn(name = "CLOUDS")
     @OneToOne
     private Clouds clouds;
 
     @Column(name = "SEARCH_DATE")
-    private LocalDate dt;
+    private String dt;
 
-    @Column(name = "SYSTEM_INFO")
+    @JoinColumn(name = "SYSTEM_INFO")
     @OneToOne
     private Sys sys;
 
